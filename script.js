@@ -1,17 +1,17 @@
-const startGameButton = document.getElementById("startGameButton");
-const player1Input = document.getElementById("player1");
-const player2Input = document.getElementById("player2");
-const gameBoard1 = document.getElementById("gameBoard1");
-const leaderboardList = document.getElementById("leaderboard");
-const restartButton = document.getElementById("restartButton");
-const resetLeaderboardButton = document.getElementById("resetLeaderboardButton");
-const timerDisplay = document.getElementById("timerDisplay");
+const startgame = document.getElementById("startgame");
+const p1input = document.getElementById("p1");
+const p2input = document.getElementById("p2");
+const gboard = document.getElementById("gboard");
+const leaderboardL = document.getElementById("leaderboard");
+const restartbtn = document.getElementById("restartbtn");
+const restartleaderbtn = document.getElementById("restartleaderbtn");
+const timer = document.getElementById("timer");
 
 let cardsData = [];
 let firstCard = null;
 let secondCard = null;
 let currentPlayer = 1;
-let scores = { player1: 0, player2: 0 };
+let scores = { p1: 0, p2: 0 };
 let gameTimer;
 let timerStartTime;
 
@@ -24,26 +24,26 @@ fetch('cards.json')
     console.error('Error loading card data:', error);
   });
 
-startGameButton.addEventListener("click", () => {
-  const player1Name = player1Input.value.trim();
-  const player2Name = player2Input.value.trim();
+startgame.addEventListener("click", () => {
+  const p1name = p1input.value.trim();
+  const p2name = p2input.value.trim();
 
-  if (!player1Name || !player2Name) {
+  if (!p1name || !p2name) {
     alert("Please enter names for both players.");
     return;
   }
 
   initializeGame();
-  startGameButton.disabled = true;
-  player1Input.disabled = true;
-  player2Input.disabled = true;
+  startgame.disabled = true;
+  p1input.disabled = true;
+  p2input.disabled = true;
 
   timerStartTime = Date.now();
   gameTimer = setInterval(updateTimer, 1000);
 });
 
 function initializeGame() {
-  gameBoard1.innerHTML = "";
+  gboard.innerHTML = "";
   const shuffledCards = [...cardsData].sort(() => Math.random() - 0.5);
 
   shuffledCards.forEach((card) => {
@@ -52,16 +52,16 @@ function initializeGame() {
     cardElement.dataset.pair = card.pair;
     cardElement.innerHTML = `<img src="${card.img}" alt="Card">`;
     cardElement.addEventListener("click", handleCardClick);
-    gameBoard1.appendChild(cardElement);
+    gboard.appendChild(cardElement);
   });
 }
 
 function handleCardClick(event) {
   const clickedCard = event.currentTarget;
 
-  if (clickedCard.classList.contains("flipped") || secondCard) return;
+  if (clickedCard.classList.contains("flip") || secondCard) return;
 
-  clickedCard.classList.add("flipped");
+  clickedCard.classList.add("flip");
   if (!firstCard) {
     firstCard = clickedCard;
   } else {
@@ -74,13 +74,13 @@ function checkMatch() {
   if (firstCard.dataset.pair === secondCard.dataset.pair) {
     updateScore();
     resetCards();
-    if (document.querySelectorAll(".card:not(.flipped)").length === 0) {
+    if (document.querySelectorAll(".card:not(.flip)").length === 0) {
       endGame();
     }
   } else {
     setTimeout(() => {
-      firstCard.classList.remove("flipped");
-      secondCard.classList.remove("flipped");
+      firstCard.classList.remove("flip");
+      secondCard.classList.remove("flip");
       resetCards();
       switchPlayer();
     }, 1000);
@@ -88,7 +88,7 @@ function checkMatch() {
 }
 
 function updateScore() {
-  const currentPlayerKey = currentPlayer === 1 ? "player1" : "player2";
+  const currentPlayerKey = currentPlayer === 1 ? "p1" : "p2";
   scores[currentPlayerKey]++;
 }
 
@@ -102,22 +102,22 @@ function switchPlayer() {
 }
 
 function endGame() {
-  const player1Name = player1Input.value;
-  const player2Name = player2Input.value;
+  const p1name = p1input.value;
+  const p2name = p2input.value;
   const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
 
-  let player1Index = leaderboard.findIndex(entry => entry.name === player1Name);
-  if (player1Index !== -1) {
-    leaderboard[player1Index].score = scores.player1;
+  let p1Index = leaderboard.findIndex(entry => entry.name === p1name);
+  if (p1Index !== -1) {
+    leaderboard[p1Index].score = scores.p1;
   } else {
-    leaderboard.push({ name: player1Name, score: scores.player1 });
+    leaderboard.push({ name: p1name, score: scores.p1 });
   }
 
-  let player2Index = leaderboard.findIndex(entry => entry.name === player2Name);
-  if (player2Index !== -1) {
-    leaderboard[player2Index].score = scores.player2;
+  let p2Index = leaderboard.findIndex(entry => entry.name === p2name);
+  if (p2Index !== -1) {
+    leaderboard[p2Index].score = scores.p2;
   } else {
-    leaderboard.push({ name: player2Name, score: scores.player2 });
+    leaderboard.push({ name: p2name, score: scores.p2 });
   }
 
   leaderboard.sort((a, b) => b.score - a.score);
@@ -130,25 +130,25 @@ function endGame() {
 
 function renderLeaderboard() {
   const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-  leaderboardList.innerHTML = leaderboard
+  leaderboardL.innerHTML = leaderboard
     .map((entry) => `<li>${entry.name}: ${entry.score} points</li>`)
     .join("");
 }
 
-restartButton.addEventListener("click", () => {
-  startGameButton.disabled = false;
-  player1Input.disabled = false;
-  player2Input.disabled = false;
-  player1Input.value = "";
-  player2Input.value = "";
-  scores = { player1: 0, player2: 0 };
+restartbtn.addEventListener("click", () => {
+  startgame.disabled = false;
+  p1input.disabled = false;
+  p2input.disabled = false;
+  p1input.value = "";
+  p2input.value = "";
+  scores = { p1: 0, p2: 0 };
   initializeGame();
   clearInterval(gameTimer);
   gameTimer = setInterval(updateTimer, 1000);
   timerStartTime = Date.now();
 });
 
-resetLeaderboardButton.addEventListener("click", () => {
+restartleaderbtn.addEventListener("click", () => {
   localStorage.removeItem("leaderboard");
   renderLeaderboard();
 });
@@ -157,7 +157,7 @@ function updateTimer() {
   const elapsedTime = Math.floor((Date.now() - timerStartTime) / 1000);
   const minutes = Math.floor(elapsedTime / 60);
   const seconds = elapsedTime % 60;
-  timerDisplay.innerHTML = `Time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  timer.innerHTML = `Time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
 renderLeaderboard();

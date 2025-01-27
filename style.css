@@ -43,7 +43,7 @@ button:hover {
     background-color: #218838;
 }
 
-#gameBoard1 {
+#gboard {
     display: grid;
     grid-template-columns: repeat(4, 120px);
     gap: 10px;
@@ -72,11 +72,11 @@ button:hover {
     border-radius: 10px;
 }
 
-.card.flipped img {
+.card.flip img {
     display: block;
 }
 
-.card.flipped {
+.card.flip {
     background-color: #fff;
 }
 
