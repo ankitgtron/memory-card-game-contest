@@ -1,1 +1,58 @@
-/* Write your styles here */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    background-color: rgb(224, 204, 178);
+}
+  
+  h1 {
+    color: #343a40;
+    margin-bottom: 10px;
+  }
+  
+  .score-board {
+    font-size: 1.2rem;
+    color: #495057;
+    margin-bottom: 20px;
+  }
+  
+  .game-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .card {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border: 2px solid #343a40;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #6c757d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+  }
+  
+  .card.flipped img {
+    display: block;
+  }
+  
+  .card.matched {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+ /* Write your styles here */
