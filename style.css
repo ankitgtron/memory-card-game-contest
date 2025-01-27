@@ -1,1 +1,70 @@
-/* Write your styles here */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    margin: 20px 0;
+    color: #333;
+  }
+  
+  #gameBoard {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .card {
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
+    cursor: pointer;
+    background-color: #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transform: scale(1);
+    transition: transform 0.2s;
+  }
+  
+  .card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+  }
+  
+  #gameboard {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    max-width: 600px;
+  }
+  
+  .card {
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
+  }
+  
+  .card.flipped img {
+    display: block;
+  }
+  
+  .card.matched {
+    pointer-events: none;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
