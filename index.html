@@ -3,14 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory Card Game</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Tiles Matching Puzzle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .game-container {
+            display: grid;
+            grid-template-columns: repeat(4, 120px);
+            gap: 10px;
+        }
+        .tile {
+            width: 120px;
+            height: 120px;
+            background-color: #3498db;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            cursor: pointer;
+            user-select: none;
+            overflow: hidden;
+        }
+        .tile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        .tile.matched {
+            visibility: hidden;
+        }
+        .info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div id="gameBoard">
-        <!-- Your game board will be generated here -->
+    <div class="info">
+        <h1>Tiles Matching Puzzle</h1>
+        <div>Moves: <span id="moveCount">0</span></div>
+        <div id="winMessage" style="display: none;">Congratulations! You've won!</div>
     </div>
-    
-    <script src="script.js"></script>
+    <div class="game-container" id="gameContainer"></div>
+
+    <script>
+        async function loadCards() {
+            const response = await fetch("cards.json");
+            return await response.json();
+        }
+
+        let firstTile = null;
+        let secondTile = null;
+        let lockBoard = false;
+        let moveCount = 0;
+        let matchedPairs = 0;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function createTiles(cards) {
+            const shuffledCards = shuffle([...cards]);
+            const gameContainer = document.getElementById("gameContainer");
+
+            shuffledCards.forEach((card) => {
+                const tile = document.createElement("div");
+                tile.classList.add("tile");
+                tile.dataset.pair = card.pair;
+
+                const img = document.createElement("img");
+                img.src = card.img;
+                tile.appendChild(img);
+
+                tile.addEventListener("click", () => handleTileClick(tile));
+                gameContainer.appendChild(tile);
+            });
+        }
+
+        function handleTileClick(tile) {
+            if (lockBoard || tile === firstTile || tile.classList.contains("matched")) {
+                return;
+            }
+
+            const img = tile.querySelector("img");
+            img.style.display = "block";
+
+            if (!firstTile) {
+                firstTile = tile;
+            } else {
+                secondTile = tile;
+                lockBoard = true;
+
+                moveCount++;
+                document.getElementById("moveCount").textContent = moveCount;
+
+                if (firstTile.dataset.pair === secondTile.dataset.pair) {
+                    setTimeout(matchTiles, 500);
+                } else {
+                    setTimeout(resetTiles, 1000);
+                }
+            }
+        }
+
+        function matchTiles() {
+            firstTile.classList.add("matched");
+            secondTile.classList.add("matched");
+            matchedPairs++;
+            resetBoard();
+
+            if (matchedPairs === 8) { // Assuming 8 pairs for a 4x4 grid
+                document.getElementById("winMessage").style.display = "block";
+            }
+        }
+
+        function resetTiles() {
+            firstTile.querySelector("img").style.display = "none";
+            secondTile.querySelector("img").style.display = "none";
+            resetBoard();
+        }
+
+        function resetBoard() {
+            [firstTile, secondTile] = [null, null];
+            lockBoard = false;
+        }
+
+        loadCards().then(createTiles);
+    </script>
 </body>
 </html>
