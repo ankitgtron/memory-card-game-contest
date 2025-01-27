@@ -1,1 +1,44 @@
 /* Write your styles here */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: black;
+}
+
+h1 {
+    color: #333;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.card {
+    width: 100px;
+    height: 100px;
+    background-color: pink;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card img {
+    width: 90%;
+    height: 90%;
+    display: none;
+}
+
+.card.flipped img {
+    display: block;
+}
+
+.scoreboard {
+    margin-top: 20px;
+    font-size: 18px;
+}
