@@ -1,86 +1,86 @@
-const jsonData = [
-  { "id": 1, "pair": "A", "img": "images/aeroplane.jpg" },
-  { "id": 2, "pair": "A", "img": "images/aeroplane-match.jpg" },
-  { "id": 3, "pair": "B", "img": "images/cat.jpg" },
-  { "id": 4, "pair": "B", "img": "images/cat-match.jpg" },
-  { "id": 5, "pair": "C", "img": "images/crocodile.jpg" },
-  { "id": 6, "pair": "C", "img": "images/crocodile-match.jpg" },
-  { "id": 7, "pair": "D", "img": "images/dog.jpg" },
-  { "id": 8, "pair": "D", "img": "images/dog-match.jpg" },
-  { "id": 9, "pair": "E", "img": "images/elephant.jpg" },
-  { "id": 10, "pair": "E", "img": "images/elephant-match.jpg" },
-  { "id": 11, "pair": "F", "img": "images/fish.jpg" },
-  { "id": 12, "pair": "F", "img": "images/fish-match.jpg" },
-  { "id": 13, "pair": "G", "img": "images/lion.jpg" },
-  { "id": 14, "pair": "G", "img": "images/lion-match.jpg" },
-  { "id": 15, "pair": "H", "img": "images/snake.jpg" },
-  { "id": 16, "pair": "H", "img": "images/snake-match.jpg" }
+
+const fs = require('fs');
+const assert = require('assert');
+
+// Check if the required files exist
+
+// 1. Check if index.html exists
+if (!fs.existsSync('index.html')) {
+  console.error('index.html file is missing.');
+  process.exit(1);  // Exit with error if index.html is missing
+} else {
+  console.log('index.html file exists.');
+}
+
+// 2. Check if cards.json exists
+if (!fs.existsSync('cards.json')) {
+  console.error('cards.json file is missing.');
+  process.exit(1);  // Exit with error if cards.json is missing
+} else {
+  console.log('cards.json file exists.');
+}
+
+// Read the contents of the cards.json file
+const cardsData = JSON.parse(fs.readFileSync('cards.json', 'utf-8'));
+
+// Validate the structure of the cards.json file
+try {
+  assert(Array.isArray(cardsData), 'cards.json must be an array');
+  console.log('cards.json is an array.');
+
+  cardsData.forEach(card => {
+    assert(card.hasOwnProperty('id'), 'Each card must have an "id" property');
+    assert(card.hasOwnProperty('pair'), 'Each card must have a "pair" property');
+    assert(card.hasOwnProperty('img'), 'Each card must have an "img" property');
+    assert(typeof card.id === 'number', 'The "id" property must be a number');
+    assert(typeof card.pair === 'string', 'The "pair" property must be a string');
+    assert(typeof card.img === 'string', 'The "img" property must be a string');
+    assert(fs.existsSync(card.img), `Image file ${card.img} does not exist`);
+  });
+
+  console.log('All cards in cards.json are valid.');
+} catch (error) {
+  console.error('Validation error in cards.json:', error.message);
+  process.exit(1);  // Exit with error if validation fails
+}
+
+// 3. Check if script.js exists
+if (!fs.existsSync('script.js')) {
+  console.error('script.js file is missing.');
+  process.exit(1);  // Exit with error if script.js is missing
+} else {
+  console.log('script.js file exists.');
+}
+
+// 4. Check if style.css exists
+if (!fs.existsSync('style.css')) {
+  console.error('style.css file is missing.');
+  process.exit(1);  // Exit with error if style.css is missing
+} else {
+  console.log('style.css file exists.');
+}
+
+// 5. Check if all image files exist
+const imageFiles = [
+  'images/aeroplane.jpg', 'images/aeroplane-match.jpg',
+  'images/cat.jpg', 'images/cat-match.jpg',
+  'images/crocodile.jpg', 'images/crocodile-match.jpg',
+  'images/dog.jpg', 'images/dog-match.jpg',
+  'images/elephant.jpg', 'images/elephant-match.jpg',
+  'images/fish.jpg', 'images/fish-match.jpg',
+  'images/lion.jpg', 'images/lion-match.jpg',
+  'images/snake.jpg', 'images/snake-match.jpg'
 ];
 
-// Shuffle the JSON data to randomize card positions
-const shuffledData = [...jsonData].sort(() => Math.random() - 0.5);
-
-const cardContainer = document.getElementById('card-container');
-let firstCard = null;
-let secondCard = null;
-let score = 0;
-
-// Dynamically generate cards
-shuffledData.forEach(item => {
-
-    
-  const card = document.createElement('div');
-  card.classList.add('card');
-  card.dataset.pair = item.pair;
-
-  const placeholder = document.createElement('div');
-  placeholder.classList.add('placeholder');
-  placeholder.textContent = '?';
-
-  const img = document.createElement('img');
-  img.src = item.img;
-  img.alt = `Image of ${item.pair}`;
-
-  card.appendChild(placeholder);
-  card.appendChild(img);
-
-  card.addEventListener('click', () => handleCardClick(card));
-  cardContainer.appendChild(card);
+imageFiles.forEach(imgPath => {
+  if (!fs.existsSync(imgPath)) {
+    console.error(`${imgPath} is missing.`);
+    process.exit(1);  // Exit with error if any image file is missing
+  } else {
+    console.log(`${imgPath} exists.`);
+  }
 });
 
-function handleCardClick(card) {
-  // Prevent clicking on the same card twice
-  if (card.classList.contains('flipped') || secondCard) return;
-
-  card.classList.add('flipped');
-
-  if (!firstCard) {
-    // First card clicked
-    firstCard = card;
-  } else {
-    // Second card clicked
-    secondCard = card;
-
-    // Check for a match
-    if (firstCard.dataset.pair === secondCard.dataset.pair) {
-      score++;
-      updateScore();
-      resetCards(true);
-    } else {
-      setTimeout(() => resetCards(false), 1000);
-    }
-  }
-}
-
-function resetCards(isMatch) {
-  if (!isMatch) {
-    firstCard.classList.remove('flipped');
-    secondCard.classList.remove('flipped');
-  }
-  firstCard = null;
-  secondCard = null;
-}
-
-function updateScore() {
-  document.getElementById('score').textContent = score;
-}
+// End the script
+console.log('All files are present and valid.');
+process.exit(0);  // Success
