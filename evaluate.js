@@ -44,7 +44,7 @@ try {
 }
 
 // 3. Check if script.js exists
-if (!fs.existsSync('js/script.js')) {
+if (!fs.existsSync('script.js')) {
   console.error('script.js file is missing.');
   process.exit(1);  // Exit with error if script.js is missing
 } else {
