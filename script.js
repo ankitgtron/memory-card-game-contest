@@ -69,7 +69,7 @@ function checkMatch() {
 
       if (matchedCards.length === shuffledCards.length) {
           clearInterval(timer);
-          alert(Congratulations! You won the game in ${moves} moves and ${time} seconds.);
+          alert("Congratulations! You won the game in ${moves} moves and ${time} seconds.");
       }
   } else {
       setTimeout(() => {
