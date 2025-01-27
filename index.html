@@ -7,8 +7,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="gameBoard">
-        <!-- Your game board will be generated here -->
+    <div class="game-container">+
+        <div class="controls">
+            <div class="game-info">
+                <div>Time: <span id="time">0:00</span></div>
+                <div>Moves: <span id="moves">0</span></div>
+                <div>Best Time: <span id="best-time">-</span></div>
+            </div>
+            <button onclick="startNewGame()">New Game</button>
+        </div>
+        <div class="memory-game"></div>
+    </div>
+    <div class="win-message" id="win-message">
+        <h2>Congratulations!</h2>
+        <p>You completed the game in <span id="final-time"></span> with <span id="final-moves"></span> moves!</p>
+        <button onclick="startNewGame()">Play Again</button>
     </div>
     
     <script src="script.js"></script>
