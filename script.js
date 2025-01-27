@@ -13,7 +13,7 @@ let secondCard = null;
 let currentPlayer = 1;
 let scores = { p1: 0, p2: 0 };
 let gameTimer;
-let timerStartTime;
+let timerstarttime;
 
 fetch('cards.json')
   .then(response => response.json())
@@ -33,89 +33,89 @@ startgame.addEventListener("click", () => {
     return;
   }
 
-  initializeGame();
+  initgame();
   startgame.disabled = true;
   p1input.disabled = true;
   p2input.disabled = true;
 
-  timerStartTime = Date.now();
-  gameTimer = setInterval(updateTimer, 1000);
+  timerstarttime = Date.now();
+  gameTimer = setInterval(updatetimer, 1000);
 });
 
-function initializeGame() {
+function initgame() {
   gboard.innerHTML = "";
-  const shuffledCards = [...cardsData].sort(() => Math.random() - 0.5);
+  const shufflcard = [...cardsData].sort(() => Math.random() - 0.5);
 
-  shuffledCards.forEach((card) => {
-    const cardElement = document.createElement("div");
-    cardElement.classList.add("card");
-    cardElement.dataset.pair = card.pair;
-    cardElement.innerHTML = `<img src="${card.img}" alt="Card">`;
-    cardElement.addEventListener("click", handleCardClick);
-    gboard.appendChild(cardElement);
+  shufflcard.forEach((card) => {
+    const cardele = document.createElement("div");
+    cardele.classList.add("card");
+    cardele.dataset.pair = card.pair;
+    cardele.innerHTML = `<img src="${card.img}" alt="Card">`;
+    cardele.addEventListener("click", handlecardClk);
+    gboard.appendChild(cardele);
   });
 }
 
-function handleCardClick(event) {
-  const clickedCard = event.currentTarget;
+function handlecardClk(event) {
+  const clkcard = event.currentTarget;
 
-  if (clickedCard.classList.contains("flip") || secondCard) return;
+  if (clkcard.classList.contains("flip") || secondCard) return;
 
-  clickedCard.classList.add("flip");
+  clkcard.classList.add("flip");
   if (!firstCard) {
-    firstCard = clickedCard;
+    firstCard = clkcard;
   } else {
-    secondCard = clickedCard;
-    checkMatch();
+    secondCard = clkcard;
+    chkmatch();
   }
 }
 
-function checkMatch() {
+function chkmatch() {
   if (firstCard.dataset.pair === secondCard.dataset.pair) {
-    updateScore();
-    resetCards();
+    uptscore();
+    resetcard();
     if (document.querySelectorAll(".card:not(.flip)").length === 0) {
-      endGame();
+      finishgame();
     }
   } else {
     setTimeout(() => {
       firstCard.classList.remove("flip");
       secondCard.classList.remove("flip");
-      resetCards();
-      switchPlayer();
+      resetcard();
+      changeplayer();
     }, 1000);
   }
 }
 
-function updateScore() {
+function uptscore() {
   const currentPlayerKey = currentPlayer === 1 ? "p1" : "p2";
   scores[currentPlayerKey]++;
 }
 
-function resetCards() {
+function resetcard() {
   firstCard = null;
   secondCard = null;
 }
 
-function switchPlayer() {
+function changeplayer() {
   currentPlayer = currentPlayer === 1 ? 2 : 1;
 }
 
-function endGame() {
+function finishgame() {
   const p1name = p1input.value;
   const p2name = p2input.value;
   const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
 
   let p1Index = leaderboard.findIndex(entry => entry.name === p1name);
   if (p1Index !== -1) {
-    leaderboard[p1Index].score = scores.p1;
+    leaderboard[p1Index].score += scores.p1;
   } else {
     leaderboard.push({ name: p1name, score: scores.p1 });
   }
 
   let p2Index = leaderboard.findIndex(entry => entry.name === p2name);
   if (p2Index !== -1) {
-    leaderboard[p2Index].score = scores.p2;
+    leaderboard[p2Index].score += scores.p2;
   } else {
     leaderboard.push({ name: p2name, score: scores.p2 });
   }
@@ -123,12 +123,12 @@ function endGame() {
   leaderboard.sort((a, b) => b.score - a.score);
   localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
 
-  renderLeaderboard();
+  showleaderboard();
   clearInterval(gameTimer);
   alert("Game Over! Check the leaderboard for scores.");
 }
 
-function renderLeaderboard() {
+function showleaderboard() {
   const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
   leaderboardL.innerHTML = leaderboard
     .map((entry) => `<li>${entry.name}: ${entry.score} points</li>`)
@@ -142,22 +142,22 @@ restartbtn.addEventListener("click", () => {
   p1input.value = "";
   p2input.value = "";
   scores = { p1: 0, p2: 0 };
-  initializeGame();
+  initgame();
   clearInterval(gameTimer);
-  gameTimer = setInterval(updateTimer, 1000);
-  timerStartTime = Date.now();
+  gameTimer = setInterval(updatetimer, 1000);
+  timerstarttime = Date.now();
 });
 
 restartleaderbtn.addEventListener("click", () => {
   localStorage.removeItem("leaderboard");
-  renderLeaderboard();
+  showleaderboard();
 });
 
-function updateTimer() {
-  const elapsedTime = Math.floor((Date.now() - timerStartTime) / 1000);
+function updatetimer() {
+  const elapsedTime = Math.floor((Date.now() - timerstarttime) / 1000);
   const minutes = Math.floor(elapsedTime / 60);
   const seconds = elapsedTime % 60;
   timer.innerHTML = `Time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
-renderLeaderboard();
+showleaderboard();
