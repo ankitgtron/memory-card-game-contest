@@ -78,6 +78,15 @@ Your submission will be evaluated based on the following:
 3. **User Experience**: Is the game intuitive, and does it provide a smooth experience for players?
 4. **Design**: How visually appealing is the game? Are the animations and interactions smooth?
 
+## Evaluation Process
+
+When you open a PR, GitHub Actions will run the evaluation script (`evaluate.js`). It will check if:
+- The required files (`index.html`, `css/style.css`, `js/script.js`) are present.
+- The game logic in `script.js` is working correctly.
+
+If your PR passes the checks, it will be ready to merge. If not, the PR will be rejected with an error message indicating what needs to be fixed.
+
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
