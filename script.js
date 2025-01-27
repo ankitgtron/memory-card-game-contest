@@ -21,7 +21,7 @@ fetch('cards.json')
     cardsData = data;
   })
   .catch(error => {
-    console.error('Error loading card data:', error);
+    console.error('cards not found', error);
   });
 
 startgame.addEventListener("click", () => {
@@ -29,7 +29,7 @@ startgame.addEventListener("click", () => {
   const p2name = p2input.value.trim();
 
   if (!p1name || !p2name) {
-    alert("Please enter names for both players.");
+    alert("Enter name of players");
     return;
   }
 
@@ -106,16 +106,16 @@ function finishgame() {
   const p2name = p2input.value;
   const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
 
-  let p1Index = leaderboard.findIndex(entry => entry.name === p1name);
-  if (p1Index !== -1) {
-    leaderboard[p1Index].score += scores.p1;
+  let p1idx = leaderboard.findIndex(entry => entry.name === p1name);
+  if (p1idx !== -1) {
+    leaderboard[p1idx].score += scores.p1;
   } else {
     leaderboard.push({ name: p1name, score: scores.p1 });
   }
 
-  let p2Index = leaderboard.findIndex(entry => entry.name === p2name);
-  if (p2Index !== -1) {
-    leaderboard[p2Index].score += scores.p2;
+  let p2idx = leaderboard.findIndex(entry => entry.name === p2name);
+  if (p2idx !== -1) {
+    leaderboard[p2idx].score += scores.p2;
   } else {
     leaderboard.push({ name: p2name, score: scores.p2 });
   }
@@ -125,7 +125,7 @@ function finishgame() {
 
   showleaderboard();
   clearInterval(gameTimer);
-  alert("Game Over! Check the leaderboard for scores.");
+  alert("Game Finished");
 }
 
 function showleaderboard() {
@@ -154,10 +154,10 @@ restartleaderbtn.addEventListener("click", () => {
 });
 
 function updatetimer() {
-  const elapsedTime = Math.floor((Date.now() - timerstarttime) / 1000);
-  const minutes = Math.floor(elapsedTime / 60);
-  const seconds = elapsedTime % 60;
-  timer.innerHTML = `Time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  const remtime = Math.floor((Date.now() - timerstarttime) / 1000);
+  const min = Math.floor(remtime / 60);
+  const sec = remtime % 60;
+  timer.innerHTML = `Time: ${min}:${sec < 10 ? '0' : ''}${sec}`;
 }
 
 showleaderboard();
