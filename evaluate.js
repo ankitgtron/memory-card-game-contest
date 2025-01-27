@@ -52,7 +52,7 @@ if (!fs.existsSync('script.js')) {
 }
 
 // 4. Check if style.css exists
-if (!fs.existsSync('css/style.css')) {
+if (!fs.existsSync('style.css')) {
   console.error('style.css file is missing.');
   process.exit(1);  // Exit with error if style.css is missing
 } else {
