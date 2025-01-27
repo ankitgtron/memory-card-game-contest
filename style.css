@@ -1,1 +1,133 @@
 /* Write your styles here */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f9;
+    background-image: linear-gradient(135deg, #ff5e62, #ff9966); /* Gradient background for a vibrant feel */
+}
+
+.gamegame-container{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 200px); /* Adjusting for larger cards */
+    gap: 15px; /* Slightly more space between cards */
+    margin-top: -50px; /* Adjust position */
+}
+
+.card {
+    width: 200px; /* Increased card size */
+    height: 200px; /* Increased card size */
+    background-color: #444;
+    border-radius: 12px; /* Slightly more rounded corners */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    perspective: 1000px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow effect for depth */
+    transition: transform 0.2s ease-in-out; /* Smooth scale on hover */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover for better interactivity */
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease-in-out; /* Smooth flipping effect */
+}
+
+.flip-counter {
+    font-size: 20px;
+    margin-top: 20px;
+    text-align: center;
+    color: #333;
+    padding-bottom:10rem ;
+}
+
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg); /* Flip effect */
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 12px; /* Match the card corner radius */
+}
+
+.card-front {
+    background-color: #444;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 28px; /* Larger font size for better visibility */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(0, 0, 0, 0.6); /* Slight opacity for front face */
+}
+
+.card-back {
+    background-color: #fff;
+    transform: rotateY(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-back img {
+    max-width: 90%; /* Increase image size relative to card */
+    max-height: 90%;
+    border-radius: 8px; /* Rounded corners for the image */
+}
+
+@media (max-width: 768px) {
+    .game-board {
+        grid-template-columns: repeat(4, 150px); /* Smaller cards for medium screens */
+        gap: 10px;
+    }
+
+    .card {
+        width: 150px;
+        height: 150px;
+    }
+
+    .card-back img {
+        max-width: 80%;
+        max-height: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-board {
+        grid-template-columns: repeat(2, 150px); /* 2 cards per row for small screens */
+        gap: 8px;
+    }
+
+    .card {
+        width: 120px; /* Further reduce size for very small screens */
+        height: 120px;
+    }
+
+    .card-back img {
+        max-width: 75%; /* Adjust image size for very small screens */
+    }
+}
