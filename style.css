@@ -1,1 +1,69 @@
 /* Write your styles here */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #a2b9bc;
+  } 
+
+  
+  .game-container { 
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    gap: 10px;
+  }
+  
+  .card {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    perspective: 1000px;
+  }
+  
+  .card .front, .card .back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+  }
+  
+  .card .back {
+    background-color: #007bff;
+    color: white;
+    transform: rotateY(180deg);
+  }
+  
+  .card.flipped .front {
+    transform: rotateY(180deg);
+  }
+  
+  .card.flipped .back {
+    transform: rotateY(0);
+  }
+  
+  .card.matched {
+    background-color: #28a745;
+    color: white;
+  }
+
+
+  .card .back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
