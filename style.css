@@ -1,1 +1,46 @@
-/* Write your styles here */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+#controls {
+  margin-bottom: 20px;
+}
+
+#game-board {
+  display: grid;
+  gap: 10px;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.card {
+  width: 100px;
+  height: 100px;
+  background-color: orange;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.card img {
+  width: 95%;
+  height: 95%;
+  object-fit: cover;
+  display: none;
+}
+
+.card.flipped img {
+  display: block;
+}
+
+#leaderboard {
+  margin-top: 20px;
+}
+
+#leaderboard h3 {
+  margin-bottom: 10px;
+}
