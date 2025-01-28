@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory Card Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div id="gameBoard">
-        <!-- Your game board will be generated here -->
+    <div class="game-container">
+        <h1>Memory Game</h1>
+        <div class="info">
+            <p>Time: <span id="timer">00:00</span></p>
+            <p>Moves: <span id="moves">0</span></p>
+        </div>
+        <div class="grid-container">
+            <!-- Cards will be dynamically created here -->
+        </div>
+        <button id="restart-btn" class="btn">Restart Game</button>
     </div>
-    
+
+    <!-- Popup Modal -->
+    <div id="popup" class="popup hidden">
+        <div class="popup-content">
+            <h2>Congratulations!</h2>
+            <p id="popup-message"></p>
+            <button id="popup-restart" class="btn">Play Again</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
+
 </html>
