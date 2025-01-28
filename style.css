@@ -1,1 +1,78 @@
-/* Write your styles here */
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #000000;
+}
+
+.game-container {
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: rgb(204, 224, 224);
+    margin:30px;
+    padding: 30px;
+    text-align: center;
+}
+
+h1 {
+    color: #000000;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+    padding-left: 25px;
+}
+
+.card {
+    width: 150px;
+    height: 105px;
+    border: 2px solid black;
+    background-color: #43a5f09a;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+}
+
+.card:hover {
+    transform: scale(1.1);
+}
+
+.card.flipped {
+    background-color: #2ea9b9;
+    transform: rotateY(180deg);
+}
+
+.game-info {
+    margin-top: 20px;
+}
+
+#restart-btn {
+    background-color: rgb(147, 221, 50);
+    color: black;
+    border: 2px solid black;
+    padding: 10px 15px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 7px;
+    transition: background-color 0.3s ease;
+}
+
+#restart-btn:hover {
+    background-color: #27ae60;
+}
