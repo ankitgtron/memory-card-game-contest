@@ -1,1 +1,61 @@
-/* Write your styles here */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+  }
+  
+  .game-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  
+  .card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+  }
+  
+  .card img {
+    display: block;
+    width: 100%;
+  }
+  
+  .card.flipped img {
+    opacity: 1;
+  }
+  
+  .card img.hidden {
+    opacity: 0;
+  }
+
+  .restart-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.restart-button:hover {
+    background-color: #45a049;
+}
+
+.leaderboard-container {
+    margin-top: 20px;
+}
+
+.leaderboard-button {
+    margin-top: 20px;
+}
+
+
