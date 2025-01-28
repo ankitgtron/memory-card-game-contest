@@ -78,8 +78,6 @@ body {
 .card.flip-back .card-front {
     transform: rotateY(0deg);
 }
-
-/* Flip animation */
 @keyframes flipCard {
     0% {
         transform: scale(1) rotateY(0deg);
@@ -91,8 +89,6 @@ body {
         transform: scale(1) rotateY(180deg);
     }
 }
-
-/* Flip-back animation */
 @keyframes flipBackCard {
     0% {
         transform: scale(1) rotateY(180deg);
