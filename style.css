@@ -6,7 +6,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #0004ff;
+    background-color: skyblue;
 }
 
 .game-container {
@@ -61,14 +61,14 @@ h1 {
 .card:hover {
     background-color: #c7d2fe;
     transform: scale(1.05);
-    border-color: #ad46e5;
+    border-color: skyblue;
 }
 
 .card.flipped,
 .card.matched {
-    background-color: #ad46e5;
+    background-color: skyblue;
     color: white;
-    border-color: #ad46e5;
+    border-color: skyblue;
     cursor: default;
     transform: none;
 }
@@ -80,6 +80,7 @@ h1 {
 
 .card-back img {
     overflow: hidden;
+    height: 100%;
 }
 
 .card-inner {
@@ -112,15 +113,15 @@ h1 {
 }
 
 .card-back {
-    background-color: #ad46e5;
+    background-color: skyblue;
     color: white;
     transform: rotateY(180deg);
 }
 
 .btn {
     padding: 10px 20px;
-    background-color: #ad46e5;
-    color: white;
+    background-color: skyblue;
+    color: black;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -129,8 +130,9 @@ h1 {
 }
 
 .btn:hover {
-    background-color: #ad38ca;
+    background-color: blue;
     transform: scale(1.05);
+    color: white;
 }
 
 .btn:active {
@@ -175,9 +177,9 @@ h1 {
 }
 
 .popup-content .btn {
-    background-color: #4f46e5;
+    background-color: skyblue;
 }
 
 .popup-content .btn:hover {
-    background-color: #4338ca;
+    background-color: blue;
 }
