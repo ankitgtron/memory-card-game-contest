@@ -1,1 +1,109 @@
-/* Write your styles here */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-size: 1.1em;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: hsla(235, 85%, 5%, 0.737);
+}
+
+.startbtn{
+        height: 40px;
+        width: 120px;
+        font-size: large;
+}
+.start{
+    margin: 10px 0px 0px 20px;
+        color: #ffffff;
+}
+#congratulations {
+    display: none; 
+    text-align: center; 
+    font-size: 1.5em; 
+    margin-top: 20px; color: #ffffff;
+    font-weight: bold;
+}
+
+#play-again {
+    padding: 10px 20px;
+    font-size: 20px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1000;
+    display: none;
+}
+
+#play-again:hover {
+    background-color: #cdcdcd;
+}
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+p {
+    text-align: center;
+}
+
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 100%;
+    max-width: 520px;
+    padding-top: 15px;
+}
+
+.card {
+    width: 100%;
+    background-size: contain;
+    border: 2px solid #606060;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    height: 150px;
+    width: 150px;
+    font-size: 24px;
+    box-shadow: rgba(196, 196, 196, 0.35) 0px 5px 15px;
+    
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+    background-image: unset;
+}
+
+.card.flipped img {
+    display: block;
+}
+.matched {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
