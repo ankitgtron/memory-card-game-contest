@@ -1,1 +1,65 @@
-/* Write your styles here */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: rgb(14, 13, 13);
+  }
+  
+  #container {
+    margin-bottom: 20px;
+  }
+  #board {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px auto;
+    width: 440px;
+}
+*{
+    color: white;
+}
+
+
+#btn-start{
+    padding:10px;
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+}
+
+.btn-start:hover {
+  background-color:#4CAF50
+}
+    
+    
+  
+  .card {
+    width: 100px;
+    height: 100px;
+    background-color: #79a1bf;;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+  
+  .card img {
+    width: 95%;
+    height: 95%;
+    object-fit: cover;
+    display: none;
+  }
+  
+  .card.flipped img {
+    display: block;
+  }
+  
+  #leaderboard {
+    margin-top: 20px;
+  }
+  
+  #leaderboard h3 {
+    margin-bottom: 10px;
+  }
