@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory Card Game</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div id="gameBoard">
-        <!-- Your game board will be generated here -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="game-container">
+      <!-- Your game board will be generated here -->
+      <header>
+        <h1>Memory Game</h1>
+        <div class="stats">
+          <span>Moves: <span id="move-counter">0</span></span>
+          <span>Time: <span id="timer">0:00</span></span>
+        </div>
+      </header>
+      <div class="game-board" id="game-board">
+
+      </div>
+      <button id="restart-button">Restart Game</button>
     </div>
-    
+
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
