@@ -1,1 +1,88 @@
-/* Write your styles here */
+body {
+    margin: 40px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+#gameBoard {
+    width: 75vw;
+    margin: auto;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin: 10px;
+    font-size: 24px;
+    color: #333;
+}
+
+#winner {
+    color: green;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    background-color: #fff;
+    color: #444;
+}
+
+.wrapper img {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    z-index: 0;
+}
+
+.box {
+    background-color: #555;
+    color: #fff;
+    z-index: 0;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 0;
+    height: 150px;
+    width: 250px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+.box img {
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .box {
+        height: 120px;
+        width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .wrapper {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .box {
+        height: 100px;
+        width: 100px;
+    }
+}
