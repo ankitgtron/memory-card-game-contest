@@ -1,1 +1,135 @@
-/* Write your styles here */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #ECF87F;
+    background-image: url(https://www.shutterstock.com/shutterstock/photos/129068885/display_1500/stock-vector-abstract-light-green-wavy-background-vector-design-eps-gradient-mesh-included-129068885.jpg);
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 120px);
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.card {
+    width: 120px;
+    height: 120px;
+    background-color: #ECF87F;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease, box-shadow 0.3s ease;
+}
+
+.card .card-front {
+    position: absolute;
+    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.card .card-front img {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+}
+
+.card .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #3D550c;
+    color: white;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    backface-visibility: hidden;
+    transform: rotateY(0deg);
+}
+.card.flipped {
+    animation: flipCard 0.4s ease forwards;
+}
+
+.card.flipped .card-back {
+    transform: rotateY(0deg);
+}
+
+.card.flipped .card-front {
+    transform: rotateY(180deg);
+}
+.card.flip-back {
+    animation: flipBackCard 0.4s ease forwards;
+}
+
+.card.flip-back .card-back {
+    transform: rotateY(180deg);
+}
+
+.card.flip-back .card-front {
+    transform: rotateY(0deg);
+}
+
+/* Flip animation */
+@keyframes flipCard {
+    0% {
+        transform: scale(1) rotateY(0deg);
+    }
+    50% {
+        transform: scale(1.1) rotateY(90deg);
+    }
+    100% {
+        transform: scale(1) rotateY(180deg);
+    }
+}
+
+/* Flip-back animation */
+@keyframes flipBackCard {
+    0% {
+        transform: scale(1) rotateY(180deg);
+    }
+    50% {
+        transform: scale(1.1) rotateY(90deg);
+    }
+    100% {
+        transform: scale(1) rotateY(0deg);
+    }
+}
+
+#start-btn {
+    background-color: #81B622;
+    color: black;
+    border: 2px solid white;
+    border-radius: 5px;
+    font-size: 25px;
+    padding: 10px 20px;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: #59981A;
+    margin-bottom: 25px;
+    align-items: center;
+    justify-self: center;
+    height: 100px;
+}
+
+#restart-btn {
+    background-color: #81B622;
+    color: black;
+    border: 2px solid white;
+    border-radius: 5px;
+    font-size: 25px;
+    padding: 10px 20px;
+}
