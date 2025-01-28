@@ -1,16 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory Card Game</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div id="gameBoard">
-        <!-- Your game board will be generated here -->
-    </div>
-    
-    <script src="script.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Memory Card Game</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <h1>Memory Card Game</h1>
+        <div class="contain">
+            <div class="info">
+                
+                <div id="board" class="board"></div>
+                
+            </div>
+            
+
+            <!-- Leaderboard Section -->
+            <div class="leaderboard">
+                <div class="stats">
+                    <div>Moves: <span id="moves">0</span></div>
+                    <div>Time: <span id="time">0:00</span></div>
+                </div>
+                <button id="restart">Restart</button>
+                <h2>Leaderboard</h2>
+                <div id="leaderboard-list"></div>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
 </html>
