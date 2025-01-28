@@ -1,85 +1,95 @@
-const fs = require('fs');
-const assert = require('assert');
+let firstCard = null;
+let secondCard = null;
+let moves = 0;
 
-// Check if the required files exist
+// Fetch cards data
+fetch("cards.json")
+  .then((response) => response.json())
+  .then((cards) => initGame(cards));
 
-// 1. Check if index.html exists
-if (!fs.existsSync('index.html')) {
-  console.error('index.html file is missing.');
-  process.exit(1);  // Exit with error if index.html is missing
-} else {
-  console.log('index.html file exists.');
-}
+// Initialize game
+function initGame(cards) {
+  const gameContainer = document.querySelector(".game-container");
+  const shuffledCards = shuffle(cards);
 
-// 2. Check if cards.json exists
-if (!fs.existsSync('cards.json')) {
-  console.error('cards.json file is missing.');
-  process.exit(1);  // Exit with error if cards.json is missing
-} else {
-  console.log('cards.json file exists.');
-}
+  shuffledCards.forEach((card) => {
+    const cardElement = document.createElement("div");
+    cardElement.classList.add("card");
+    cardElement.dataset.pair = card.pair;
 
-// Read the contents of the cards.json file
-const cardsData = JSON.parse(fs.readFileSync('cards.json', 'utf-8'));
+    const imgElement = document.createElement("img");
+    imgElement.src = card.img;
+    imgElement.classList.add("hidden");
+    cardElement.appendChild(imgElement);
 
-// Validate the structure of the cards.json file
-try {
-  assert(Array.isArray(cardsData), 'cards.json must be an array');
-  console.log('cards.json is an array.');
-
-  cardsData.forEach(card => {
-    assert(card.hasOwnProperty('id'), 'Each card must have an "id" property');
-    assert(card.hasOwnProperty('pair'), 'Each card must have a "pair" property');
-    assert(card.hasOwnProperty('img'), 'Each card must have an "img" property');
-    assert(typeof card.id === 'number', 'The "id" property must be a number');
-    assert(typeof card.pair === 'string', 'The "pair" property must be a string');
-    assert(typeof card.img === 'string', 'The "img" property must be a string');
-    assert(fs.existsSync(card.img), `Image file ${card.img} does not exist`);
+    gameContainer.appendChild(cardElement);
   });
 
-  console.log('All cards in cards.json are valid.');
-} catch (error) {
-  console.error('Validation error in cards.json:', error.message);
-  process.exit(1);  // Exit with error if validation fails
+  displayMoveCount();
+  addEventListeners();
 }
 
-// 3. Check if script.js exists
-if (!fs.existsSync('script.js')) {
-  console.error('script.js file is missing.');
-  process.exit(1);  // Exit with error if script.js is missing
-} else {
-  console.log('script.js file exists.');
+// Shuffle cards
+function shuffle(array) {
+  return array.sort(() => Math.random() - 0.5);
 }
 
-// 4. Check if style.css exists
-if (!fs.existsSync('style.css')) {
-  console.error('style.css file is missing.');
-  process.exit(1);  // Exit with error if style.css is missing
-} else {
-  console.log('style.css file exists.');
+// Add event listeners
+function addEventListeners() {
+  document.querySelectorAll(".card").forEach((card) => {
+    card.addEventListener("click", () => {
+      if (card.classList.contains("flipped") || secondCard) return;
+
+      card.classList.add("flipped");
+      card.querySelector("img").classList.remove("hidden");
+
+      if (!firstCard) {
+        firstCard = card;
+      } else {
+        secondCard = card;
+        moves++;
+        updateMoveCount();
+        checkMatch(firstCard, secondCard);
+      }
+    });
+  });
 }
 
-// 5. Check if all image files exist
-const imageFiles = [
-  'images/aeroplane.jpg', 'images/aeroplane-match.jpg',
-  'images/cat.jpg', 'images/cat-match.jpg',
-  'images/crocodile.jpg', 'images/crocodile-match.jpg',
-  'images/dog.jpg', 'images/dog-match.jpg',
-  'images/elephant.jpg', 'images/elephant-match.jpg',
-  'images/fish.jpg', 'images/fish-match.jpg',
-  'images/lion.jpg', 'images/lion-match.jpg',
-  'images/snake.jpg', 'images/snake-match.jpg'
-];
-
-imageFiles.forEach(imgPath => {
-  if (!fs.existsSync(imgPath)) {
-    console.error(`${imgPath} is missing.`);
-    process.exit(1);  // Exit with error if any image file is missing
+// Check for match
+function checkMatch(card1, card2) {
+  if (card1.dataset.pair === card2.dataset.pair) {
+    [card1, card2].forEach((card) => {
+      card.classList.add("matched");
+      card.querySelector("img").classList.remove("hidden");
+    });
+    resetTurn();
   } else {
-    console.log(`${imgPath} exists.`);
+    setTimeout(() => {
+      [card1, card2].forEach((card) => {
+        card.classList.remove("flipped");
+        card.querySelector("img").classList.add("hidden");
+      });
+      resetTurn();
+    }, 1000);
   }
-});
+}
 
-// End the script
-console.log('All files are present and valid.');
-process.exit(0);  // Success
+// Reset turn
+function resetTurn() {
+  firstCard = null;
+  secondCard = null;
+}
+
+// Display move count
+function displayMoveCount() {
+  const moveCounter = document.createElement("div");
+  moveCounter.classList.add("move-counter");
+  moveCounter.textContent = "Moves: 0";
+  document.body.insertBefore(moveCounter, document.querySelector(".game-container"));
+}
+
+// Update move count
+function updateMoveCount() {
+  const moveCounter = document.querySelector(".move-counter");
+  moveCounter.textContent = 'Moves: ${moves}';
+}
