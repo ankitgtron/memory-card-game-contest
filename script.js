@@ -19,18 +19,14 @@ class MemoryGame {
   
     async init() {
       try {
-        // Load cards data
         const response = await fetch("cards.json");
         const cardsData = await response.json();
         this.cards = this.shuffleCards(cardsData);
   
-        // Set up event listeners
         this.restartButton.addEventListener("click", () => this.restartGame());
   
-        // Create game board
         this.createBoard();
   
-        // Load leaderboard
         this.loadLeaderboard();
       } catch (error) {
         console.error("Error initializing game:", error);
@@ -75,7 +71,6 @@ class MemoryGame {
         return;
       }
   
-      // Start timer on first card flip
       if (!this.gameStarted) {
         this.startTimer();
         this.gameStarted = true;
@@ -202,7 +197,6 @@ class MemoryGame {
     }
   }
   
-  // Start the game when the page loads
   document.addEventListener("DOMContentLoaded", () => {
     new MemoryGame();
   });

@@ -73,18 +73,18 @@ body {
 }
 
 .card.matched {
-    background-color: #4caf50; /* Green color for matched cards */
-    border: 2px solid #388e3c; /* Dark green border for clarity */
+    background-color: #4caf50; 
+    border: 2px solid #388e3c; 
 }
 
 .card.matched img {
-    filter: none; /* No grayscale filter, just keep the image in its original colors */
-    opacity: 0.8; /* Optional: reduce opacity slightly to differentiate from unmatched cards */
+    filter: none;
+    opacity: 0.8;
 }
 
 .card.mismatch {
-    background-color: #f44336; /* Red color for mismatch */
-    border: 2px solid #d32f2f; /* Dark red border for clarity */
+    background-color: #f44336;
+    border: 2px solid #d32f2f;
 }
 
 button {
