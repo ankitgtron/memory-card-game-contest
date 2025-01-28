@@ -8,7 +8,19 @@
 </head>
 <body>
     <div id="gameBoard">
-        <!-- Your game board will be generated here -->
+        <div id="scoreBoard">
+            <h2 id="name">Memory Card Game</h2>
+            <div id="moves-and-timer">
+                <div>
+                    <h4>Moves: <span id="moves">0</span></h4>
+                </div>
+                <div>
+                    <h4>Time: <span id="time">00:00</span></h4>
+                </div>
+                <button id="reset-button" onclick="resetGame()">Reset Game</button>
+            </div>
+        </div>
+        <div id="board"></div>
     </div>
     
     <script src="script.js"></script>
