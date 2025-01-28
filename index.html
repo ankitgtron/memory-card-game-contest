@@ -7,9 +7,37 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="gameBoard">
-        <!-- Your game board will be generated here -->
-    </div>
+        <header>
+            <button class="start" onclick="startGame()">Start game</button>
+            <p >Moves: <span class="moves">0</span></p>
+            <p>Timer : <span id="timer">0</span></p>
+
+        </header>
+    <main>
+        <h1>Group 20</h1>
+        <div id="gameBoard">
+                
+                <div class="card" data-image="img1"><img src="./images/aeroplane-match.jpg"></div>
+                <div class="card" data-image="img1"><img src="./images/aeroplane.jpg"></div>
+                <div class="card" data-image="img2"><img src="./images/cat.jpg"></div>
+                <div class="card" data-image="img2"><img src="./images/cat-match.jpg"></div>
+                <div class="card" data-image="img3"><img src="./images/crocodile-match.jpg"></div>
+                <div class="card" data-image="img3"><img src="./images/crocodile.jpg"></div>
+                <div class="card" data-image="img4"><img src="./images/dog-match.jpg"></div>
+                <div class="card" data-image="img4"><img src="./images/dog.jpg"></div>
+                <div class="card" data-image="img5"><img src="./images/elephant-match.jpg"></div>
+                <div class="card" data-image="img5"><img src="./images/elephant.jpg"></div>
+                <div class="card" data-image="img6"><img src="./images/fish-match.jpg"></div>
+                <div class="card" data-image="img6"><img src="./images/fish.jpg"></div>
+                <div class="card" data-image="img7"><img src="./images/lion-match.jpg"></div>
+                <div class="card" data-image="img7"><img src="./images/lion.jpg"></div>
+                <div class="card" data-image="img8"><img src="./images/snake.jpg"></div>
+                <div class="card" data-image="img8"><img src="./images/snake-match.jpg"></div>
+        </div>
+    </main>
+
+
+    <div id="end"></div>
     
     <script src="script.js"></script>
 </body>
