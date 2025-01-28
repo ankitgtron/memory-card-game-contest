@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory Card Game</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Card Game</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="gameBoard">
-        <!-- Your game board will be generated here -->
+  <div id="game-container">
+    <p id="timer">Time: 0:00</p>
+    <div id="grid"></div>
+    <div id="scoreboard">
+      <p>Player 1 Score: <span id="player1-score">0</span></p>
+      <p>Player 2 Score: <span id="player2-score">0</span></p>
+      <p id="turn-info">Player 1's Turn</p>
     </div>
-    
-    <script src="script.js"></script>
+    <button id="new-game-btn" style="display: none;">Start New Game</button>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
