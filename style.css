@@ -1,1 +1,67 @@
-/* Write your styles here */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #333;
+}
+
+#stats {
+    margin: 20px;
+    font-size: 1.2em;
+}
+
+#gameBoard {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    gap: 10px;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.card {
+    width: 100px;
+    height: 100px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    background-size: cover;
+    background-position: center;
+}
+
+.card.flipped {
+    background-color: #fff;
+    color: #333;
+    transform: rotateY(180deg);
+}
+
+.card.matched {
+    background-color: #4CAF50;
+    cursor: default;
+}
+
+#leaderboard {
+    margin-top: 30px;
+}
+
+#leaderboardList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#leaderboardList li {
+    background-color: #ddd;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+}
