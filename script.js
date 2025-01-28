@@ -1,3 +1,5 @@
+// Write your code here
+
 const imagePaths = [
     'images/aeroplane.jpg', 'images/aeroplane-match.jpg',
     'images/cat.jpg', 'images/cat-match.jpg',
