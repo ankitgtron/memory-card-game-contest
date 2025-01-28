@@ -1,5 +1,3 @@
-/* Write your styles here */
-/* Write your styles here */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -36,3 +34,28 @@ body {
   .card img.hidden {
     opacity: 0;
   }
+
+  .restart-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.restart-button:hover {
+    background-color: #45a049;
+}
+
+.leaderboard-container {
+    margin-top: 20px;
+}
+
+.leaderboard-button {
+    margin-top: 20px;
+}
+
+
