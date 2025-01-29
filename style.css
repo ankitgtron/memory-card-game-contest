@@ -5,7 +5,7 @@
   }
   
   body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Lucida Handwriting', 'Comic Sans MS', cursive, sans-serif;
     background-color: #0e0f0f;
     display: flex;
     flex-direction: column;
@@ -96,6 +96,5 @@
   .TimerMove p {
     margin: 5px 0;
     font-weight: bold;
-    /* font-style: italic; */
   }
   

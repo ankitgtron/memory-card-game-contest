@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
       resetBoard();
       matchedPairs++;
 
-      if (matchedPairs === 8) { // 8 pairs for 16 cards
+      if (matchedPairs === 8) { 
         clearInterval(timerInterval);
         setTimeout(() => alert(`Congratulations! You won in ${moves} moves and ${timerDisplay.textContent}!`), 500);
       }
