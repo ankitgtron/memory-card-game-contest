@@ -7,10 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="gameBoard">
-        <!-- Your game board will be generated here -->
+    <div class="game-container">
+        <header>
+            <h1>Memory Card Game</h1>
+            <div class="stats">
+                <p>Moves: <span id="moves-count">0</span></p>
+                <p>Time: <span id="time-count">0</span>s</p>
+            </div>
+        </header>
+        <div class="game-board" id="game-board"></div>
     </div>
-    
     <script src="script.js"></script>
 </body>
 </html>
